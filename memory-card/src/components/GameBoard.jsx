@@ -12,7 +12,7 @@ export function GameBoard() {
     useEffect(() => {
         async function fetchData() {
             const pokemon = await fetchPokemonImages(12);
-            setCards(pokemon);
+            setCards(shuffleCards(pokemon));
         }
         fetchData();
     }, [])
@@ -29,6 +29,11 @@ export function GameBoard() {
             setScore(newScore);
             setSelectedCards([...selectedCards, id]);
         }
+        setCards(shuffleCards(cards));
+    }
+
+    function shuffleCards(cards) {
+        return [...cards].sort(() => Math.random() - 0.5)
     }
 
     return (
