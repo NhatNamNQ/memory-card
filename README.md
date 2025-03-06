@@ -1,4 +1,5 @@
 The project about Pokemon memory cards
-Techonologies:
+
+Technologies:
 - React
 - Tailwind
