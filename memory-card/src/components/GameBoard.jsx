@@ -18,6 +18,11 @@ export function GameBoard() {
     }, [])
 
     function handleCardClick(id) {
+        if (bestScore >= 12) {
+            setScore(0);
+            setBestScore(0);
+        }
+
         if (selectedCards.includes(id)) {
             setScore(0);
             setSelectedCards([]);
@@ -37,14 +42,15 @@ export function GameBoard() {
     }
 
     return (
-        <div className=''>
-            <ScoreBoard score={score} bestScore={bestScore}/>
-            <div className='grid grid-cols-4'>
+        <div className='m-2'>
+            {bestScore === 12 ? 
+            (<p className='text-center p-4 text-lg font-bold bg-gray-500 rounded-lg'>You win. Click any cards to reset this game.</p>)
+                : (<ScoreBoard score={score} bestScore={bestScore} />)}
+            <div className='grid grid-cols-4 gap-0.5 mt-2'>
                 {cards.map((card) => (
                     <Card key={card.id} pokemon={card} onClick={handleCardClick} />
                 ))}
             </div>
-            <div>{score}</div>
         </div>
     )
 }
